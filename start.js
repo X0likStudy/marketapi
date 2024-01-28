@@ -22,9 +22,10 @@ connection.connect((error) => {
 
 bot.onText(/\/start/, (msg, match) => {
     const chatId = msg.chat.id
-    users.push(chatId)
     bot.sendMessage(chatId, 'Your ID has been registered successfully!')
-    bot.sendMessage(developer, `New Registration: ${chatId} (${msg.chat.username})`)
+    bot.sendMessage(developer, `New Registration: ${chatId} (${msg.chat.first_name}, ${msg.chat.username})`)
+
+    console.log( msg.chat )
 
     const sql = "INSERT INTO users(id, username) VALUES(?, ?)";
     const user = [chatId, msg.chat.username];
